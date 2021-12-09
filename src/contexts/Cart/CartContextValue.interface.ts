@@ -2,8 +2,8 @@ import {Dispatch, SetStateAction} from 'react';
 import {Ship} from '../../types';
 
 export interface CartContextValue {
-  productList: Ship[];
+  shipList: Ship[];
   totalPrice: number;
-  setProductList: Dispatch<SetStateAction<Ship[]>>;
+  setShipList: Dispatch<SetStateAction<Ship[]>>;
   setTotalPrice: Dispatch<SetStateAction<number>>;
 }

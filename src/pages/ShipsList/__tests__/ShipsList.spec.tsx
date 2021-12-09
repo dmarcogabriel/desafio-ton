@@ -1,11 +1,16 @@
 import React from 'react';
-import {fireEvent, render, waitFor} from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  waitFor,
+  cleanup,
+} from '@testing-library/react-native';
 import {ShipsList} from '../ShipsList';
 import {ApiResponse} from '../ApiResponse.interface';
 import {Ship} from 'src/types';
 
 jest.mock('../shipList.service', () => ({
-  loadProducts: jest.fn(
+  loadShips: jest.fn(
     async (): Promise<ApiResponse> =>
       Promise.resolve({
         results: [
@@ -61,21 +66,21 @@ jest.mock('../shipList.service', () => ({
           },
         ],
         count: 0,
-        next: '',
+        next: 'test',
         previous: '',
       }),
   ),
 }));
 
-let mockAddedProduct: Ship;
-const mockAddProduct = jest.fn((ship: Ship) => {
-  mockAddedProduct = ship;
+let mockAddedShip: Ship;
+const mockAddShip = jest.fn((ship: Ship) => {
+  mockAddedShip = ship;
 });
-let mockRemovedProductId: string;
-const mockRemoveProduct = jest.fn((id: string) => {
-  mockRemovedProductId = id;
+let mockRemovedShipId: string;
+const mockRemoveShip = jest.fn((id: string) => {
+  mockRemovedShipId = id;
 });
-const mockProductList: Ship[] = [
+const mockShipList: Ship[] = [
   {
     id: '2',
     name: 'Star Destroyer',
@@ -105,11 +110,13 @@ const mockProductList: Ship[] = [
 
 jest.mock('../../../hooks', () => ({
   useCart: () => ({
-    addProduct: mockAddProduct,
-    removeProductById: mockRemoveProduct,
-    productList: mockProductList,
+    addShip: mockAddShip,
+    removeShipById: mockRemoveShip,
+    shipList: mockShipList,
   }),
 }));
+
+beforeAll(cleanup);
 
 describe('pages/ShipList', () => {
   it('should pass on list all products', async () => {
@@ -124,8 +131,8 @@ describe('pages/ShipList', () => {
 
     fireEvent.press(getByTestId('shipItemButton_1'));
 
-    expect(mockAddProduct).toHaveBeenCalled();
-    expect(mockAddedProduct.id).toBe('1');
+    expect(mockAddShip).toHaveBeenCalled();
+    expect(mockAddedShip.id).toBe('1');
   });
 
   it('should pass on remove ship from cart', async () => {
@@ -133,7 +140,7 @@ describe('pages/ShipList', () => {
 
     fireEvent.press(getByTestId('shipItemButton_2'));
 
-    expect(mockRemoveProduct).toHaveBeenCalled();
-    expect(mockRemovedProductId).toBe('2');
+    expect(mockRemoveShip).toHaveBeenCalled();
+    expect(mockRemovedShipId).toBe('2');
   });
 });

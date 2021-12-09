@@ -11,9 +11,9 @@ import {useCart} from 'src/hooks';
 
 // Remember you can only use a hook inside a react component
 ...
-  const {productList, addProduct, removeProductById, totalPrice, resetCart} = useCart();
+  const {shipList, addShip, removeShipById, totalPrice, resetCart} = useCart();
 
-  addProduct(newProduct);
+  addShip(newProduct);
 ...
 ```
 
@@ -26,26 +26,26 @@ Here its described each property returned from `useCart` hook:
 
 | State             | Description                     | Type   | Default |
 | ----------------- | ------------------------------- | ------ | ------- |
-| **`productList`** | Products added to cart          | Ship[] | []      |
+| **`shipList`**    | Products added to cart          | Ship[] | []      |
 | **`totalPrice`**  | Total price of products in cart | number | 0       |
 
 ## Functions
 
-### addProduct
+### addShip
 
 * Params: Ship
 * Return: void
 
-Used to add a product to the cart, and also update the `totalPrice` state.
+Used to add a ship product to the cart, and also update the `totalPrice` state.
 
 ---
 
-### removeProductById
+### removeShipById
 
 * Params: string
 * Return: void
 
-Used to remove a product from the cart using it's id.
+Used to remove a ship product from the cart using it's id.
 
 ---
 

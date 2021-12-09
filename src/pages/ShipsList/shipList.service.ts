@@ -1,13 +1,13 @@
 import api from '../../services/api';
 import {ApiResponse} from './ApiResponse.interface';
-import {mapProducts} from '../../utils';
+import {mapShips} from '../../utils';
 
-const loadProducts = async (page: number): Promise<ApiResponse> => {
+const loadShips = async (page: number): Promise<ApiResponse> => {
   const {data} = await api.get<ApiResponse>('starships', {params: {page}});
   return {
     ...data,
-    results: mapProducts(data.results),
+    results: mapShips(data.results),
   };
 };
 
-export default {loadProducts};
+export default {loadShips};

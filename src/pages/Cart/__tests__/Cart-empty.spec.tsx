@@ -3,10 +3,10 @@ import {render} from '@testing-library/react-native';
 import {Cart} from '../Cart';
 import {Ship} from 'src/types';
 
-const mockProductList: Ship[] = [];
+const mockShipList: Ship[] = [];
 jest.mock('../../../hooks', () => ({
   useCart: () => ({
-    productList: mockProductList,
+    shipList: mockShipList,
   }),
 }));
 

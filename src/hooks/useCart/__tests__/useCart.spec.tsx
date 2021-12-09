@@ -80,17 +80,17 @@ const mockShips: Ship[] = [
 
 describe('hooks/useCart', () => {
   const wrapper = ({children}: CartProviderProps) => (
-    <CartProvider>{children}</CartProvider>
+    <CartProvider ships={[]}>{children}</CartProvider>
   );
 
   it('should pass on add product', async () => {
     const {result} = renderHook(() => useCart(), {wrapper});
 
     act(() => {
-      result.current.addProduct(mockShips[0]);
+      result.current.addShip(mockShips[0]);
     });
 
-    const [ship] = result.current.productList;
+    const [ship] = result.current.shipList;
 
     expect(ship.id).toBe('1');
     expect(ship.name).toBe('CR90 corvette');
@@ -102,11 +102,11 @@ describe('hooks/useCart', () => {
     const {result} = renderHook(() => useCart(), {wrapper});
 
     act(() => {
-      result.current.addProduct(mockShips[0]);
-      result.current.removeProductById('1');
+      result.current.addShip(mockShips[0]);
+      result.current.removeShipById('1');
     });
 
-    expect(result.current.productList).toHaveLength(0);
+    expect(result.current.shipList).toHaveLength(0);
   });
 
   it('should pass on reset cart', () => {
@@ -117,37 +117,37 @@ describe('hooks/useCart', () => {
     });
 
     expect(result.current.totalPrice).toBe(0);
-    expect(result.current.productList).toHaveLength(0);
+    expect(result.current.shipList).toHaveLength(0);
   });
 
   it('should pass on add multiple products', () => {
     const {result} = renderHook(() => useCart(), {wrapper});
 
     act(() => {
-      result.current.addProduct({...mockShips[0], cost_in_credits: '1000'});
+      result.current.addShip({...mockShips[0], cost_in_credits: '1000'});
     });
 
     act(() => {
-      result.current.addProduct({...mockShips[1], cost_in_credits: '1000'});
+      result.current.addShip({...mockShips[1], cost_in_credits: '1000'});
     });
 
     act(() => {
-      result.current.addProduct({...mockShips[2], cost_in_credits: '1000'});
+      result.current.addShip({...mockShips[2], cost_in_credits: '1000'});
     });
 
-    const [product1, product2, product3] = result.current.productList;
+    const [ship1, ship2, ship3] = result.current.shipList;
 
-    expect(product1.id).toBe('1');
-    expect(product1.name).toBe('CR90 corvette');
-    expect(product1.cost_in_credits).toBe('1000');
+    expect(ship1.id).toBe('1');
+    expect(ship1.name).toBe('CR90 corvette');
+    expect(ship1.cost_in_credits).toBe('1000');
 
-    expect(product2.id).toBe('2');
-    expect(product2.name).toBe('Star Destroyer');
-    expect(product2.cost_in_credits).toBe('1000');
+    expect(ship2.id).toBe('2');
+    expect(ship2.name).toBe('Star Destroyer');
+    expect(ship2.cost_in_credits).toBe('1000');
 
-    expect(product3.id).toBe('3');
-    expect(product3.name).toBe('Sentinel-class landing craft');
-    expect(product3.cost_in_credits).toBe('1000');
+    expect(ship3.id).toBe('3');
+    expect(ship3.name).toBe('Sentinel-class landing craft');
+    expect(ship3.cost_in_credits).toBe('1000');
 
     expect(result.current.totalPrice).toBe(3000);
   });

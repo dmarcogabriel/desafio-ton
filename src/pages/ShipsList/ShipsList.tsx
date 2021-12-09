@@ -7,28 +7,20 @@ import {useCart} from '../../hooks';
 import {ActivityIndicator} from 'react-native';
 
 export const ShipsList = (): JSX.Element => {
-  const [products, setProducts] = useState<Ship[]>([]);
-  const {addProduct, productList, removeProductById} = useCart();
+  const [ships, setShips] = useState<Ship[]>([]);
+  const {addShip, shipList, removeShipById} = useCart();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [canLoadMore, setCanLoadMore] = useState<boolean>(true);
 
-  const handleAddToCart = (ship: Ship) => {
-    addProduct(ship);
-  };
+  const isAddedToCart = (ship: Ship) =>
+    shipList.some(shipItem => shipItem.id === ship.id);
 
-  const handleRemoveFromCart = (id: string) => {
-    removeProductById(id);
-  };
-
-  const isAddedToCart = (product: Ship) =>
-    productList.some(productItem => productItem.id === product.id);
-
-  const loadProductsFromService = useCallback(async () => {
+  const loadShipsFromApi = useCallback(async () => {
     if (!isLoading && canLoadMore) {
       setIsLoading(true);
-      const data = await shipListService.loadProducts(page);
-      setProducts(oldProducts => [...oldProducts, ...data.results]);
+      const data = await shipListService.loadShips(page);
+      setShips(oldShips => [...oldShips, ...data.results]);
       setCanLoadMore(!!data.next);
       setPage(page + 1);
       setIsLoading(false);
@@ -36,13 +28,13 @@ export const ShipsList = (): JSX.Element => {
   }, [isLoading, page, canLoadMore]);
 
   useEffect(() => {
-    loadProductsFromService();
+    loadShipsFromApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <ShipListContainer
-      data={products}
+      data={ships}
       keyExtractor={(_, i) => `${i + 1}`}
       numColumns={2}
       contentContainerStyle={styles.listContainer}
@@ -50,8 +42,8 @@ export const ShipsList = (): JSX.Element => {
         <ShipItem
           ship={item}
           isAddedToCart={isAddedToCart(item)}
-          onAddToCart={handleAddToCart}
-          onRemoveFromCart={handleRemoveFromCart}
+          onAddToCart={addShip}
+          onRemoveFromCart={removeShipById}
         />
       )}
       ListFooterComponent={
@@ -60,7 +52,7 @@ export const ShipsList = (): JSX.Element => {
         </ShipListFooter>
       }
       onEndReachedThreshold={0.1}
-      onEndReached={() => loadProductsFromService()}
+      onEndReached={() => loadShipsFromApi()}
     />
   );
 };

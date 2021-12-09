@@ -1,6 +1,6 @@
 import {Ship} from 'src/types';
 
 export interface CartItemProps {
-  product: Ship;
+  ship: Ship;
   onRemoveItem: (id: string) => void;
 }

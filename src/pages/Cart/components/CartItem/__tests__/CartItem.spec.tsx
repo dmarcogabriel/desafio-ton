@@ -3,7 +3,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import {CartItem} from '../CartItem';
 import {Ship} from '../../../../../types';
 
-const mockProduct: Ship = {
+const mockShip: Ship = {
   id: '1',
   name: 'CR90 corvette',
   model: 'CR90 corvette',
@@ -37,7 +37,7 @@ const mockRemoveItem = jest.fn((id: string) => {
 describe('pages/Cart/components/CartItem', () => {
   it('should pass on render cart item', () => {
     const {getByTestId} = render(
-      <CartItem onRemoveItem={mockRemoveItem} product={mockProduct} />,
+      <CartItem onRemoveItem={mockRemoveItem} ship={mockShip} />,
     );
 
     expect(getByTestId('cartItem_1')).toBeDefined();
@@ -47,7 +47,7 @@ describe('pages/Cart/components/CartItem', () => {
 
   it('should pass on remove cart item', () => {
     const {getByTestId} = render(
-      <CartItem product={mockProduct} onRemoveItem={mockRemoveItem} />,
+      <CartItem ship={mockShip} onRemoveItem={mockRemoveItem} />,
     );
 
     fireEvent.press(getByTestId('cartItemRemoveButton_1'));

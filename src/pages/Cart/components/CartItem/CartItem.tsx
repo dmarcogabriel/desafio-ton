@@ -9,26 +9,23 @@ import {
 } from './styles';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 
-export const CartItem = ({
-  product,
-  onRemoveItem,
-}: CartItemProps): JSX.Element => {
+export const CartItem = ({ship, onRemoveItem}: CartItemProps): JSX.Element => {
   const handleRemoveItem = () => {
-    onRemoveItem(product.id);
+    onRemoveItem(ship.id);
   };
 
   return (
-    <CartItemContainer testID={`cartItem_${product.id}`}>
+    <CartItemContainer testID={`cartItem_${ship.id}`}>
       <CartItemContent>
-        <CartItemName testID={`cartItemName_${product.id}`}>
-          {product.name}
+        <CartItemName testID={`cartItemName_${ship.id}`}>
+          {ship.name}
         </CartItemName>
-        <CartItemPrice testID={`cartItemPrice_${product.id}`}>
-          {`Price: ${product.cost_in_credits}`}
+        <CartItemPrice testID={`cartItemPrice_${ship.id}`}>
+          {`Price: ${ship.cost_in_credits}`}
         </CartItemPrice>
       </CartItemContent>
       <CartItemRemoveButton
-        testID={`cartItemRemoveButton_${product.id}`}
+        testID={`cartItemRemoveButton_${ship.id}`}
         onPress={handleRemoveItem}>
         <MIcon name="close" size={24} color="#fff" />
       </CartItemRemoveButton>

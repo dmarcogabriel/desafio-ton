@@ -1,6 +1,6 @@
-import {mapProducts} from '../productsMapper.util';
+import {mapShips} from '../shipsMapper.util';
 
-const mockProduct = {
+const mockShip = {
   id: '1',
   name: 'CR90 corvette',
   model: 'CR90 corvette',
@@ -28,12 +28,12 @@ const mockProduct = {
 
 describe('utils/productsMapper', () => {
   it('should pass on map product', () => {
-    const [mappdedProduct] = mapProducts([mockProduct]);
+    const [mappdedProduct] = mapShips([mockShip]);
     expect(mappdedProduct.id).toBe('2');
   });
 
   it('should pass on map empty array', () => {
-    const mappdedProducts = mapProducts([]);
+    const mappdedProducts = mapShips([]);
     expect(mappdedProducts).toHaveLength(0);
   });
 });

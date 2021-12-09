@@ -3,14 +3,14 @@ import {CartContext} from '../../contexts/Cart';
 import {Ship} from '../../types';
 
 export const useCart = () => {
-  const {productList, setProductList, setTotalPrice, totalPrice} =
+  const {shipList, setShipList, setTotalPrice, totalPrice} =
     useContext(CartContext);
 
-  const updateTotalPrice = (cartProducts: Ship[]): number => {
+  const updateTotalPrice = (shipsInCart: Ship[]): number => {
     let prices = 0;
-    cartProducts
-      .map(product => {
-        return parseFloat(product.cost_in_credits);
+    shipsInCart
+      .map(ship => {
+        return parseFloat(ship.cost_in_credits);
       })
       .forEach(price => {
         prices += price;
@@ -18,35 +18,39 @@ export const useCart = () => {
     return prices;
   };
 
-  const addProduct = useCallback(
-    (product: Ship) => {
-      const updatedProductList = [...productList, product];
-      setProductList(updatedProductList);
+  const addShip = useCallback(
+    (ship: Ship) => {
+      const updatedShipList = [...shipList, ship];
+      setShipList(updatedShipList);
     },
-    [productList, setProductList],
+    [shipList, setShipList],
   );
 
-  const removeProductById = useCallback(
+  const removeShipById = useCallback(
     (id: string) => {
-      const filterProduct = (product: any): boolean => {
-        return product.id !== id;
+      const filterShip = (ship: any): boolean => {
+        return ship.id !== id;
       };
 
-      setProductList(oldProductList => [
-        ...oldProductList.filter(filterProduct),
-      ]);
+      setShipList(oldShipList => [...oldShipList.filter(filterShip)]);
     },
-    [setProductList],
+    [setShipList],
   );
 
   const resetCart = () => {
-    setProductList([]);
+    setShipList([]);
     setTotalPrice(0);
   };
 
   useEffect(() => {
-    setTotalPrice(updateTotalPrice(productList));
-  }, [productList, setTotalPrice]);
+    setTotalPrice(updateTotalPrice(shipList));
+  }, [shipList, setTotalPrice]);
 
-  return {productList, addProduct, removeProductById, totalPrice, resetCart};
+  return {
+    shipList,
+    addShip,
+    removeShipById,
+    totalPrice,
+    resetCart,
+  };
 };

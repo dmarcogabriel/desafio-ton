@@ -58,7 +58,7 @@ const mockProductList: Ship[] = [
 
 jest.mock('../../../hooks', () => ({
   useCart: () => ({
-    productList: mockProductList,
+    shipList: mockProductList,
     totalPrice:
       parseFloat(mockProductList[0].cost_in_credits) +
       parseFloat(mockProductList[1].cost_in_credits),
@@ -79,12 +79,12 @@ describe('cart with products', () => {
   it('should pass count products', () => {
     const {getByTestId} = render(<Cart />);
 
-    expect(getByTestId('productsCount').children[0]).toBe('2 added products:');
+    expect(getByTestId('shipsCount').children[0]).toBe('2 added products:');
   });
 
   it('should pass render products total price', () => {
     const {getByTestId} = render(<Cart />);
 
-    expect(getByTestId('productsTotalPrice').children[0]).toBe('Total: 20000');
+    expect(getByTestId('shipsTotalPrice').children[0]).toBe('Total: 20000');
   });
 });

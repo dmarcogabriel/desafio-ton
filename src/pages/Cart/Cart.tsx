@@ -11,27 +11,27 @@ import {useCart} from '../../hooks';
 import {CartItem} from './components';
 
 export const Cart = (): JSX.Element => {
-  const {productList, removeProductById, totalPrice} = useCart();
+  const {shipList, removeShipById, totalPrice} = useCart();
 
   return (
     <CartContainer>
-      {!productList.length ? (
+      {!shipList.length ? (
         <CartIsEmptyText testID="emptyCartMessage">
           Cart is Empty!
         </CartIsEmptyText>
       ) : (
         <CartList
-          data={productList}
+          data={shipList}
           keyExtractor={item => item.id}
           ListHeaderComponent={
-            <CartProductCount testID="productsCount">{`${productList.length} added products:`}</CartProductCount>
+            <CartProductCount testID="shipsCount">{`${shipList.length} added products:`}</CartProductCount>
           }
           renderItem={({item}) => (
-            <CartItem onRemoveItem={removeProductById} product={item} />
+            <CartItem onRemoveItem={removeShipById} ship={item} />
           )}
           ListFooterComponent={
             <CartListFooter>
-              <CartTotalPriceText testID="productsTotalPrice">{`Total: ${totalPrice}`}</CartTotalPriceText>
+              <CartTotalPriceText testID="shipsTotalPrice">{`Total: ${totalPrice}`}</CartTotalPriceText>
             </CartListFooter>
           }
         />

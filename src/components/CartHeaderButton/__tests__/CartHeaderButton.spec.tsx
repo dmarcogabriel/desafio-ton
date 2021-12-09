@@ -14,7 +14,7 @@ jest.mock('@react-navigation/native', () => ({
 
 jest.mock('../../../hooks', () => ({
   useCart: () => ({
-    productList: ['', ''],
+    shipList: ['', ''],
   }),
 }));
 

@@ -5,8 +5,8 @@ const extractId = (productUrl: string) => {
   return withotLastSlash.substr(withotLastSlash.lastIndexOf('/') + 1);
 };
 
-export const mapProducts = (products: Ship[]): Ship[] =>
-  products
+export const mapShips = (ships: Ship[]): Ship[] =>
+  ships
     .filter(product => product.cost_in_credits !== 'unknown')
     .map(product => ({
       ...product,

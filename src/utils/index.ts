@@ -1,2 +1,2 @@
-export * from './productsMapper.util';
+export * from './shipsMapper.util';
 export * from './text.util';

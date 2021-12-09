@@ -7,7 +7,7 @@ import {StatusBar} from 'react-native';
 export const App = (): JSX.Element => (
   <>
     <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-    <CartProvider products={[]}>
+    <CartProvider ships={[]}>
       <NavigationContainer>
         <Navigation />
       </NavigationContainer>

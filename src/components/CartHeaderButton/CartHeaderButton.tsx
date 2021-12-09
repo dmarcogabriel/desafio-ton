@@ -7,16 +7,16 @@ import {useCart} from '../../hooks';
 
 export const CartHeaderButton = () => {
   const {navigate} = useNavigation<CartScreenProps>();
-  const {productList} = useCart();
+  const {shipList} = useCart();
 
   const handleGoToCart = () => navigate('Cart');
 
   return (
     <ButtonContainer testID="cartHeaderButton" onPress={handleGoToCart}>
-      {!!productList.length && (
+      {!!shipList.length && (
         <ButtonBadge testID="cartButtonBadge">
           <ButtonBadgeText testID="cartButtonBadgeNumber">
-            {productList.length}
+            {shipList.length}
           </ButtonBadgeText>
         </ButtonBadge>
       )}

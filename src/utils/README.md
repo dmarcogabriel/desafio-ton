@@ -2,21 +2,21 @@
 
 Functions used to format, parse, map and other helpers for the application.
 
-## productsMapper.util
+## shipsMapper.util
 
 A mapper to filter ships that have 'unknown' prices, and to set it's id.
 
 ### Usage
 
 ```js
-import {mapProducts} from 'src/utils';
+import {mapShips} from 'src/utils';
 
 ...
-  const mappedProducts = mapProducts(products);  
+  const mappedShips = mapProducts(mapShips);  
 ...
 ```
 
-### mapProducts Function
+### mapShips Function
 
 * Params: Ship[]
 * Return: Ship[]
