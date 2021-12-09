@@ -12,6 +12,12 @@ jest.mock('@react-navigation/native', () => ({
   }),
 }));
 
+jest.mock('../../../hooks', () => ({
+  useCart: () => ({
+    productList: ['', ''],
+  }),
+}));
+
 describe('components/CartHeaderButton', () => {
   it('should navigate to Cart', () => {
     const {getByTestId} = render(<CartHeaderButton />);
@@ -21,5 +27,16 @@ describe('components/CartHeaderButton', () => {
 
     expect(mockNavigate).toHaveBeenCalled();
     expect(mockNavigateScreen).toBe('Cart');
+  });
+
+  it('should show cart badge number', () => {
+    const {getByTestId} = render(<CartHeaderButton />);
+
+    expect(getByTestId('cartButtonBadge')).toBeDefined();
+    expect(getByTestId('cartButtonBadge')).toHaveStyle({
+      backgroundColor: 'red',
+      position: 'absolute',
+    });
+    expect(getByTestId('cartButtonBadgeNumber').children[0]).toBe('2');
   });
 });
