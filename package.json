@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest --watchAll",
     "test:c": "jest --coverage",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
