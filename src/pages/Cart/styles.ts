@@ -8,3 +8,7 @@ export const CartIsEmptyText = styled.Text``;
 export const CartList = styled.FlatList`` as unknown as typeof FlatList;
 
 export const CartProductCount = styled.Text``;
+
+export const CartListFooter = styled.View``;
+
+export const CartTotalPriceText = styled.Text``;

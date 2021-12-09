@@ -9,7 +9,7 @@ const mockProductList: Ship[] = [
     name: 'CR90 corvette',
     model: 'CR90 corvette',
     manufacturer: 'Corellian Engineering Corporation',
-    cost_in_credits: '3500000',
+    cost_in_credits: '10000',
     length: '150',
     max_atmosphering_speed: '950',
     crew: '30-165',
@@ -34,7 +34,7 @@ const mockProductList: Ship[] = [
     name: 'Star Destroyer',
     model: 'Imperial I-class Star Destroyer',
     manufacturer: 'Kuat Drive Yards',
-    cost_in_credits: '150000000',
+    cost_in_credits: '10000',
     length: '1,600',
     max_atmosphering_speed: '975',
     crew: '47,060',
@@ -59,6 +59,9 @@ const mockProductList: Ship[] = [
 jest.mock('../../../hooks', () => ({
   useCart: () => ({
     productList: mockProductList,
+    totalPrice:
+      parseFloat(mockProductList[0].cost_in_credits) +
+      parseFloat(mockProductList[1].cost_in_credits),
   }),
 }));
 
@@ -79,5 +82,11 @@ describe('cart with products', () => {
     expect(getByTestId('productsCount').children[0]).toBe(
       '2 produtos adicionados:',
     );
+  });
+
+  it('should pass render products total price', () => {
+    const {getByTestId} = render(<Cart />);
+
+    expect(getByTestId('productsTotalPrice').children[0]).toBe('Total: 20000');
   });
 });

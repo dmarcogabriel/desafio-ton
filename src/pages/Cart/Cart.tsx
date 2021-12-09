@@ -4,12 +4,14 @@ import {
   CartIsEmptyText,
   CartList,
   CartProductCount,
+  CartListFooter,
+  CartTotalPriceText,
 } from './styles';
 import {useCart} from '../../hooks';
 import {CartItem} from './components';
 
 export const Cart = (): JSX.Element => {
-  const {productList, removeProductById} = useCart();
+  const {productList, removeProductById, totalPrice} = useCart();
 
   return (
     <CartContainer>
@@ -27,6 +29,11 @@ export const Cart = (): JSX.Element => {
           renderItem={({item}) => (
             <CartItem onRemoveItem={removeProductById} product={item} />
           )}
+          ListFooterComponent={
+            <CartListFooter>
+              <CartTotalPriceText testID="productsTotalPrice">{`Total: ${totalPrice}`}</CartTotalPriceText>
+            </CartListFooter>
+          }
         />
       )}
     </CartContainer>
