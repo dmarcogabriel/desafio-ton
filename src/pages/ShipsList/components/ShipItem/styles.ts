@@ -9,6 +9,15 @@ export const ShipItemImage = styled.Image`
 
 export const ShipItemName = styled.Text``;
 
+export const ShipItemPrice = styled.Text``;
+
 export const ShipItemButton = styled.TouchableOpacity``;
 
-export const ShipItemButtonText = styled.Text``;
+interface ShipItemButtonTextProps {
+  isAddedToCart: boolean;
+}
+
+export const ShipItemButtonText = styled.Text`
+  color: ${({isAddedToCart}: ShipItemButtonTextProps) =>
+    isAddedToCart ? 'red' : 'green'};
+`;

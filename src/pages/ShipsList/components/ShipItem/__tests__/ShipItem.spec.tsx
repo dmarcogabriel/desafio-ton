@@ -72,9 +72,13 @@ describe('pages/ShipList/ShipItem', () => {
 
     const shipItemName1 = getByTestId('shipItemName_1');
     const shipItemImage1 = getByTestId('shipItemImage_1');
+    const shipItemPrice1 = getByTestId('shipItemPrice_1');
+    const shipItemButtonText_1 = getByTestId('shipItemButtonText_1');
 
     expect(shipItemName1.children[0]).toBe('CR90 corvette');
+    expect(shipItemPrice1.children[0]).toBe('Price: 3500000');
     expect(shipItemImage1).toHaveProp('resizeMode', 'cover');
+    expect(shipItemButtonText_1).toHaveStyle({color: 'green'});
   });
 
   it('should pass on render ship item added to cart', () => {
@@ -89,12 +93,12 @@ describe('pages/ShipList/ShipItem', () => {
 
     const shipItemName1 = getByTestId('shipItemName_1');
     const shipItemImage1 = getByTestId('shipItemImage_1');
+    const shipItemButtonText_1 = getByTestId('shipItemButtonText_1');
 
-    expect(getByTestId('shipItemButtonText_1').children[0]).toBe(
-      'Remove From Cart',
-    );
+    expect(shipItemButtonText_1.children[0]).toBe('Remove From Cart');
     expect(shipItemName1.children[0]).toBe('CR90 corvette');
     expect(shipItemImage1).toHaveProp('resizeMode', 'cover');
+    expect(shipItemButtonText_1).toHaveStyle({color: 'red'});
   });
 
   it('should pass on press remove from cart button', () => {

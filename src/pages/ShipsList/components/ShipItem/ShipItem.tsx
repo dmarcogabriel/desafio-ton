@@ -5,6 +5,7 @@ import {
   ShipItemButtonText,
   ShipItemName,
   ShipItemImage,
+  ShipItemPrice,
 } from './styles';
 import {ShipItemProps} from './ShipItemProps.interface';
 import {shipImagePlaceholder} from './assets';
@@ -34,10 +35,15 @@ export const ShipItem = memo(
         <ShipItemName testID={`shipItemName_${ship.id}`}>
           {ship.name}
         </ShipItemName>
+        <ShipItemPrice testID={`shipItemPrice_${ship.id}`}>
+          {`Price: ${ship.cost_in_credits}`}
+        </ShipItemPrice>
         <ShipItemButton
           testID={`shipItemButton_${ship.id}`}
           onPress={handlePressButton}>
-          <ShipItemButtonText testID={`shipItemButtonText_${ship.id}`}>
+          <ShipItemButtonText
+            testID={`shipItemButtonText_${ship.id}`}
+            isAddedToCart={isAddedToCart}>
             {isAddedToCart ? 'Remove From Cart' : 'Add To Cart'}
           </ShipItemButtonText>
         </ShipItemButton>
