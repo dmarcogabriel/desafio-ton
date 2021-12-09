@@ -79,9 +79,7 @@ describe('cart with products', () => {
   it('should pass count products', () => {
     const {getByTestId} = render(<Cart />);
 
-    expect(getByTestId('productsCount').children[0]).toBe(
-      '2 produtos adicionados:',
-    );
+    expect(getByTestId('productsCount').children[0]).toBe('2 added products:');
   });
 
   it('should pass render products total price', () => {

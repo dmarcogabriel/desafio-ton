@@ -24,7 +24,7 @@ export const Cart = (): JSX.Element => {
           data={productList}
           keyExtractor={item => item.id}
           ListHeaderComponent={
-            <CartProductCount testID="productsCount">{`${productList.length} produtos adicionados:`}</CartProductCount>
+            <CartProductCount testID="productsCount">{`${productList.length} added products:`}</CartProductCount>
           }
           renderItem={({item}) => (
             <CartItem onRemoveItem={removeProductById} product={item} />
