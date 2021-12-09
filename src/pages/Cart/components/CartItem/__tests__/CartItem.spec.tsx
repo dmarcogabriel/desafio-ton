@@ -42,6 +42,7 @@ describe('pages/Cart/components/CartItem', () => {
 
     expect(getByTestId('cartItem_1')).toBeDefined();
     expect(getByTestId('cartItemName_1').children[0]).toBe('CR90 corvette');
+    expect(getByTestId('cartItemPrice_1').children[0]).toBe('Price: 3500000');
   });
 
   it('should pass on remove cart item', () => {
