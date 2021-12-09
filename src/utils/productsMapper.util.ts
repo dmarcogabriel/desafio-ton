@@ -6,7 +6,9 @@ const extractId = (productUrl: string) => {
 };
 
 export const mapProducts = (products: Ship[]): Ship[] =>
-  products.map(product => ({
-    ...product,
-    id: extractId(product.url),
-  }));
+  products
+    .filter(product => product.cost_in_credits !== 'unknown')
+    .map(product => ({
+      ...product,
+      id: extractId(product.url),
+    }));
