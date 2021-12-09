@@ -11,12 +11,15 @@ export const CartHeaderButton = () => {
 
   const handleGoToCart = () => navigate('Cart');
 
+  const renderBadgeNumber = (): number | string =>
+    shipList.length > 9 ? '9+' : shipList.length;
+
   return (
     <ButtonContainer testID="cartHeaderButton" onPress={handleGoToCart}>
       {!!shipList.length && (
         <ButtonBadge testID="cartButtonBadge">
           <ButtonBadgeText testID="cartButtonBadgeNumber">
-            {shipList.length}
+            {renderBadgeNumber()}
           </ButtonBadgeText>
         </ButtonBadge>
       )}

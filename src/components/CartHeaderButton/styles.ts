@@ -6,7 +6,7 @@ export const ButtonBadge = styled.View`
   background-color: red;
   position: absolute;
   border-radius: 100px;
-  padding: 2px 8px;
+  padding: 2px 2px;
   top: -12px;
   right: -12px;
 `;
